@@ -8,8 +8,12 @@ interface UseProductArgs {
   initialValues?: InitialValues;
 }
 
-export const useProduct = ({ onChange, product, value = 0, initialValues }: UseProductArgs) => {
-
+export const useProduct = ({
+  onChange,
+  product,
+  value = 0,
+  initialValues,
+}: UseProductArgs) => {
   const [counter, setCounter] = useState<number>(initialValues?.count || value);
   const isMounted = useRef(false);
 
@@ -22,24 +26,25 @@ export const useProduct = ({ onChange, product, value = 0, initialValues }: UseP
 
   const reset = () => {
     setCounter(initialValues?.count || value);
-  }
+  };
 
   useEffect(() => {
     if (!isMounted.current) return;
 
     isMounted.current = true;
     setCounter(value);
-    return () => { isMounted.current = false; };
-
+    return () => {
+      isMounted.current = false;
+    };
   }, [value]);
 
   return {
     counter,
-    isMaxCountReached: !!initialValues?.count && initialValues.maxCount === counter,
+    isMaxCountReached:
+      !!initialValues?.count && initialValues.maxCount === counter,
     maxCount: initialValues?.maxCount,
 
     increaseBy,
     reset,
-  }
-
-}
+  };
+};

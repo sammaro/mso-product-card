@@ -12,7 +12,6 @@ export interface Props {
 }
 
 export const ProductImage = ({ img, imgAlt, className, style }: Props) => {
-
   const { product } = useContext(ProductContext);
   const src = img ? img : product.img ?? noImage;
 
@@ -23,5 +22,5 @@ export const ProductImage = ({ img, imgAlt, className, style }: Props) => {
       src={src}
       alt={imgAlt}
     />
-  )
+  );
 };
